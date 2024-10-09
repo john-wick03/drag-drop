@@ -1,0 +1,9 @@
+.container{
+    margin-block: auto;
+}
+span{
+    background-color: rgb(35, 26, 149);
+}
+.important{
+    background-color: rgb(232, 232, 232);
+}

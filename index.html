@@ -1,0 +1,98 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Question-layouts</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet"
+        integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH" crossorigin="anonymous">
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"
+        integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz"
+        crossorigin="anonymous"></script>
+    <link rel="stylesheet" href="style.css">
+</head>
+
+<body>
+    <div class="container mt-5">
+        <h2>What do you find most important work?</h2>
+        <div class="mt-4">
+            <button class="btn rounded-4 border-black fw-bold m-2 option" id="option1" draggable="true">
+                <span class="rounded-4 px-2 text-white">1</span> Salary
+            </button>
+            <button class="btn rounded-4 border-black fw-bold m-2 option" id="option2" draggable="true">
+                <span class="rounded-4 px-2 text-white">2</span> Training & Development
+            </button>
+            <button class="btn rounded-4 border-black fw-bold m-2 option" id="option3" draggable="true">
+                <span class="rounded-4 px-2 text-white">3</span> Benefits
+            </button>
+            <button class="btn rounded-4 border-black fw-bold m-2 option" id="option4" draggable="true">
+                <span class="rounded-4 px-2 text-white">4</span> Remote work
+            </button> <br>
+            <button class="btn rounded-4 border-black fw-bold m-2 option" id="option5" draggable="true">
+                <span class="rounded-4 px-2 text-white">5</span> Location
+            </button>
+            <button class="btn rounded-4 border-black fw-bold m-2 option" id="option6" draggable="true">
+                <span class="rounded-4 px-2 text-white">6</span> Work atmosphere
+            </button>
+        </div>
+
+        <div class="mt-4 row g-3">
+            <div class="col-12 col-lg-4">
+                <div class="border border-dark-subtle rounded-3">
+                    <h6 class="important text-center p-3 rounded-top-3">Not Important</h6>
+                    <div class="blank text-center fw-bold" style="height: 5rem;"></div>
+                </div>
+            </div>
+            <div class="col-12 col-lg-4">
+                <div class="border border-dark-subtle rounded-3">
+                    <h6 class="important text-center p-3 rounded-top-3">Not Important</h6>
+                    <div class="blank text-center fw-bold" style="height: 5rem;"></div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        const options = document.querySelectorAll('.option');
+        const blanks = document.querySelectorAll('.blank');
+        let activeOption = null;
+
+        const blankOptions = Array.from(blanks).map(() => []);
+
+        options.forEach(option => {
+            option.addEventListener('click', () => {
+                activeOption = option; 
+            });
+        });
+
+        blanks.forEach((blank, index) => {
+            blank.addEventListener('click', () => {
+                if (activeOption) {
+                    const optionText = activeOption.textContent.trim();
+
+                    if (!blankOptions[index].includes(optionText)) {
+                        blankOptions[index].push(optionText);
+                        blank.textContent = blankOptions[index].join(", ");
+                        activeOption.style.display = 'none';
+                        activeOption = null;
+                    }
+                }
+            });
+
+            blank.addEventListener('dblclick', () => {
+                blankOptions[index].forEach(optionText => {
+                    const optionToReturn = Array.from(options).find(option => option.textContent.trim() === optionText);
+                    if (optionToReturn) {
+                        optionToReturn.style.display = "inline-block"; 
+                    }
+                });
+
+                blankOptions[index] = [];
+                blank.textContent = "";
+            });
+        });
+    </script>
+</body>
+
+</html>
