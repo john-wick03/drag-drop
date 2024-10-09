@@ -83,6 +83,7 @@ function handleClick(index) {
 
 // Add the option to the blank area
 function addOptionToBlank(option, index) {
+    blankOptionStyle();
     const optionText = option.textContent.trim();
     if (!blanks[index].textContent.includes(optionText)) {
         blanks[index].textContent += optionText + ", ";
@@ -97,7 +98,12 @@ function resetOptionStyles() {
         option.style.color = '';
     });
 }
-
+// blank option style
+  function blankOptionStyle(){
+    blanks.forEach(option => {
+       option.classList.add('in-blank');
+    })
+  }
 // Handle drag start
 options.forEach(option => {
     option.addEventListener('dragstart', (event) => {
@@ -110,24 +116,32 @@ options.forEach(option => {
         activeOption = option; 
         option.style.backgroundColor = 'rgba(99, 135, 218, 0.403)';
         option.style.color = 'white';
+
     });
 });
-
-// Handle double-click to return option
+ 
+/// Handle double-click to return one option at a time
 blanks.forEach((blank, index) => {
     blank.addEventListener('dblclick', () => {
         const optionsText = blank.textContent.split(', ').filter(text => text); 
-        optionsText.forEach(optionText => {
-            const optionToReturn = Array.from(options).find(option => option.textContent.trim() === optionText);
+        
+        if (optionsText.length > 0) {
+            const lastOptionText = optionsText.pop(); 
+            const optionToReturn = Array.from(options).find(option => option.textContent.trim() === lastOptionText);
+            
             if (optionToReturn) {
                 optionToReturn.style.display = "inline-block"; 
                 optionToReturn.style.backgroundColor = '';
                 optionToReturn.style.color = '';
+
             }
-        });
-        blank.textContent = ""; 
+            
+            // Update the blank's text content after removing the last option
+            blank.textContent = optionsText.join(', ') + (optionsText.length > 0 ? ', ' : '');
+        }
     });
 });
+
 
 
     </script>
