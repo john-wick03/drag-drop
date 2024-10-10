@@ -12,3 +12,15 @@ span{
     /* background-color: rgb(35, 26, 149); */
 
 }
+.submit{
+    background-color: rgb(58, 50, 180);
+    border: none;
+    padding: 7px 10px;
+    color: white;
+}
+.submit:hover{
+   background-color: rgb(27, 21, 112);
+}
+.array{
+    background-color: white;
+}
