@@ -9,7 +9,7 @@ span{
 }
 .in-blank{
     color: rgb(190, 40, 40); 
-    /* background-color: rgb(35, 26, 149); */
+    
 
 }
 .submit{
@@ -23,4 +23,8 @@ span{
 }
 .array{
     background-color: white;
+}
+
+.hidden-option {
+    visibility: hidden;
 }
