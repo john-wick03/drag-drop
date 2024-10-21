@@ -1,24 +1,14 @@
 .container{
     margin-block: auto;
 }
+
 span{
     background-color: rgb(35, 26, 149);
 }
 .important{
     background-color: rgb(232, 232, 232);
 }
-/* .in-blank{
-    color: rgb(190, 40, 40); 
-    border: 3px dotted rgba(24, 180, 215, 0.462);
-    max-width: max-content;
-    padding: 5px;
-    align-items: center;
-} */
-/* .in-blank:hover{
-    border: 3px dotted rgba(24, 180, 215, 0.462);
-    color: rgb(190, 40, 40); 
 
-} */
 .submit{
     background-color: rgb(58, 50, 180);
     border: none;
