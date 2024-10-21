@@ -112,6 +112,7 @@
         function addOptionToBlank(option, index) {
             const optionText = option.textContent.trim();
             if (!selectedOptions[index].includes(optionText)) {
+
                 const optionClone = option.cloneNode(true);
                 optionClone.setAttribute('draggable', false);
                 optionClone.addEventListener('click', () => removeOption(optionClone, index));
@@ -132,6 +133,7 @@
                 originalOption.classList.remove('hidden-option');
             }
             optionElement.remove();
+
         }
 
         // Reset styles of all options
@@ -141,19 +143,30 @@
                 option.style.color = '';
             });
         }
+        // dragColorChange----
+        function dragColorChange(){
+            options.forEach(option =>{
+                    option.style.backgroundColor = 'rgba(99, 135, 218, 0.403)';
+                    option.style.color = 'white';
+            })
+        }
 
         // Handle dropping of options
         function drop(event, index) {
+            dragColorChange();
             event.preventDefault();
             const optionId = event.dataTransfer.getData('text/plain');
             const option = document.getElementById(optionId);
             if (option) {
                 addOptionToBlank(option, index);
             }
+            resetOptionStyles();
+
+
         }
 
-        // Handle form submission
-function handleSubmit(event) {
+    // Handle form submission
+    function handleSubmit(event) {
     event.preventDefault();
     const errorMsg = document.getElementById('error-msg');
     const importantArray = document.getElementById('important-array');
@@ -161,7 +174,6 @@ function handleSubmit(event) {
 
     errorMsg.textContent = '';
 
-    // Check if any options are left in the original options list
     const remainingOptions = Array.from(options).filter(option => 
         !option.classList.contains('hidden-option')
     );
@@ -171,7 +183,6 @@ function handleSubmit(event) {
         return false;
     }
 
-    // Display the selected options
     importantArray.textContent = selectedOptions[0].join(', ');
     notImportantArray.textContent = selectedOptions[1].join(', ');
 }
